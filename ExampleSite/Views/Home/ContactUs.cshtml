@@ -1,0 +1,113 @@
+﻿@model ExampleSite.Models.ContactUsModel
+
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="hero-image">
+    <img src="~/Content/Images/hero.png" class="img-fluid"/>
+</div>
+<div id="content" class="container text-center">
+    <h1>Get In Touch</h1>
+    <p>
+        If you have any questions or comments we'd love to hear from you. Just fill out the form below and we'll get back to soon. Rest assured that any information you provide will remain confidential.
+    </p>
+
+    <form role="form" action="/Home/ContactUs" method="post">
+
+        @* FirstName field *@
+        <div class="form-group">
+            <div class="input-group input-group-lg">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+                <i class="fa fa-asterisk form-control-feedback" aria-hidden="true"></i>
+            </div>
+            <span class="text-danger">@Html.ValidationMessageFor(model => model.FirstName)</span>
+        </div>
+
+        @* Email field *@
+        <div class="form-group">
+            <div class="input-group input-group-lg">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email Address" } })
+                <i class="fa fa-asterisk form-control-feedback" aria-hidden="true"></i>
+            </div>
+            <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
+        </div>
+
+        @* Subject field *@
+        <div class="form-group">
+            <div class="input-group input-group-lg">
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", @placeholder = "Subject" } })
+                <i class="fa fa-asterisk form-control-feedback" aria-hidden="true"></i>
+            </div>
+            <span class="text-danger">@Html.ValidationMessageFor(model => model.Subject)</span>
+        </div>
+
+        @* Message field *@
+        <div class="form-group">
+            <div class="input-group input-group-lg">
+                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control", @placeholder = "Message" } })
+                <i class="fa fa-asterisk form-control-feedback" aria-hidden="true"></i>
+            </div>
+            <span class="text-danger">@Html.ValidationMessageFor(model => model.Message)</span>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <button type="submit" class="btn btn-primary bg-primary font13">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+    <div class="row">
+        <div class="col-md-6 bg-primary">
+            <div id="locations" class="col-md-offset-3 text-center">
+                <h2>Our Location</h2>
+                <h5>Example Site</h5>
+                <h5>2500 Technology Dr</h5>
+                <h5>Louisville, KY 40299</h5>
+                <h5>www.examplesite.com</h5>
+                <h4>Call Us</h4>
+                <p>
+                    Louisville: 555-555-5555<br />
+                    San Antonio: 555-555-5555<br />
+                    Toll Free: 555-555-5555<br />
+                </p>
+                <div class="social-links"><a href="#"><i class="fa fa-facebook"></i></a></div>
+            </div>
+        </div>
+        <div id="map" class="col-md-6">
+        </div>
+    </div>
+
+<script>
+    function initMap() {
+        var uluru = { lat: 38.2102451, lng: -85.5478277};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: uluru,
+            disableDefaultUI: true,
+            zoomControl: true,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.TOP_LEFT
+            }
+        });
+        var marker = new google.maps.Marker({
+            icon: {
+                url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                labelOrigin: new google.maps.Point(75,30)
+            },
+            position: uluru,
+            label: {
+                text: '2500 Technology Dr',
+                color: '#8f0404',
+                font: 'Arial Narrow',
+                fontSize: '12px',
+                fontWeight: 'bold'
+            },
+            map: map
+        });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXpoMKMqRdbTkqWBHWwAmbDB2avXyoPWc&callback=initMap"></script>
